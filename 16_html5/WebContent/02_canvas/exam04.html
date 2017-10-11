@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>캔버스 - 연결모양</h1>
+	<canvas id="myCanvas" width="600" height="400" 
+	        style="border: 1px solid tomato"></canvas>
+	
+	<script>
+		var canvas = document.querySelector("#myCanvas");
+		var ctx = canvas.getContext("2d");
+		
+		ctx.lineWidth = 20; // 선의 굵기
+		
+		// 선그리기
+		ctx.beginPath();
+		ctx.moveTo(100, 100);
+		// 연결 좌표 지정
+		ctx.lineTo(300, 100);
+		// 연결 좌표 지정
+		ctx.lineTo(300, 300);
+		
+		// 연결 선의 모양
+		ctx.lineJoin = "round";  // 둥근 모양
+		ctx.lineJoin = "bevel";  // 깍인 모양
+		ctx.lineJoin = "miter";  // 사각 모양
+		
+		// 시작 지점과 종료 지점 연결
+		ctx.closePath();
+		
+		ctx.strokeStyle = "#778899";
+		ctx.stroke();
+		// 안쪽 채우기
+// 		ctx.fill();
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

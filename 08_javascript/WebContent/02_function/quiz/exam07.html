@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	input[type="button"] {
+		border: 1px solid;
+ 		width: 38px; 
+		margin: 1px;
+	}
+	
+	input[type="button"]:hover {
+		background: black;
+		color: white;
+	}
+	
+	.input {
+	    width: 160px;
+	}
+	.doubleInput {
+		width: 80px !important;
+	}
+	body {
+		margin: 20px;
+	}
+	table {
+		border: 1px solid #848484;
+		border-collapse: collapse;
+	}
+</style>
+<script>
+	function input(val) {
+		var resultView = document.getElementById("resultView");
+		resultView.value += val;
+	}	
+	function cls() {
+		document.getElementById("resultView").value = "";
+	}
+	function calc() {
+		var resultView = document.getElementById("resultView");
+		resultView.value = eval(resultView.value);
+	}
+</script>
+</head>
+<body>
+	<table>
+	<tr>
+		<td colspan="4">
+			<input type="text" id="resultView" class="input" readonly="readonly" value="" align="right" />
+		</td>
+	</tr>
+	<tr>
+		<td><input type="button" value="7" onclick="input('7')" /></td>
+		<td><input type="button" value="8" onclick="input('8')" /></td>
+		<td><input type="button" value="9" onclick="input('9')" /></td>
+		<td><input type="button" value="/" onclick="input('/')" /></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="4" onclick="input('4')" /></td>
+		<td><input type="button" value="5" onclick="input('5')" /></td>
+		<td><input type="button" value="6" onclick="input('6')" /></td>
+		<td><input type="button" value="*" onclick="input('*')" /></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="1" onclick="input('1')" /></td>
+		<td><input type="button" value="2" onclick="input('2')" /></td>
+		<td><input type="button" value="3" onclick="input('3')" /></td>
+		<td><input type="button" value="-" onclick="input('-')" /></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="0" onclick="input('0')" /></td>
+		<td><input type="button" value="." onclick="input('.')" /></td>
+		<td><input type="button" value="+" onclick="input('+')" /></td>
+		<td><input type="button" value="%" onclick="input('%')" /></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="button" class="doubleInput" value="="      onclick="calc()" /></td>
+		<td colspan="2"><input type="button" class="doubleInput" value="clear"  onclick="cls()" /></td>
+	</tr>
+	</table>
+</body>
+</html>

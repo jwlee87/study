@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div {
+		background: #000;
+		color: #fff;
+		padding: 20px;
+		font-size: 40px;
+		position: absolute;
+		width: 600px;
+		height: 400px;
+		top: -440px;
+		left: 200px;
+	}
+	#div1 { background: #123456; }
+	#div2 { background: #456789; }
+	#div3 { background: #6789ab; }
+	#div4 { background: #89abcd; }
+	#div5 { background: #ababab; }
+</style>
+
+<script>
+var x = -440;
+var cPos = 1;  // 현재 슬라이드 번호
+var direction = "F";
+function nextSlide() {
+	console.log(cPos);
+	if (cPos > 5) {
+		alert("마지막 슬라이드 입니다.");
+		return ;
+	}
+	
+	// 방향이 전환되는 첫번째 작업
+	if (direction == "R") {
+		direction = "F";
+		cPos++;
+		x = -440;
+	} 
+	
+	x += 20;
+	var obj = document.getElementById("div" + cPos);
+	obj.style.top = x + "px";
+	if (x < 100) {
+		setTimeout(nextSlide, 10);
+	} 
+	else {
+		cPos++;
+		x = -440;
+	}
+}
+function prevSlide() {
+	if (cPos == 1) {
+		alert("처음 슬라이드 입니다.");
+		return ;
+	}
+	// 방향이 전환되는 첫번째 작업
+	if (direction == "F") {
+		direction = "R";
+		cPos--;
+		x = 100;
+	} 
+	
+	x -= 20;
+	var obj = document.getElementById("div" + cPos);
+	obj.style.top = x + "px";
+	if (x > -440) {
+		setTimeout(prevSlide, 10);
+	} 
+	else {
+		cPos--;
+		x = 100;
+	}
+}
+</script>
+</head>
+<body>
+	<p>
+		<a href="#1" onclick="prevSlide()">이전 슬라이드</a>
+		<a href="#1" onclick="nextSlide()">다음 슬라이드</a>
+	</p>
+	<div id="div1">슬라이드 1번</div>
+	<div id="div2">슬라이드 2번</div>
+	<div id="div3">슬라이드 3번</div>
+	<div id="div4">슬라이드 4번</div>
+	<div id="div5">슬라이드 5번</div>
+</body>
+</html>
+
+
+
+
+
+

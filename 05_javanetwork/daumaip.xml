@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel>
+<title>Search Daum Open API</title>
+<description>Daum Open API search result</description>
+<generator>Daum Open API</generator>
+<link>http://dna.daum.net/apis</link>
+<lastBuildDate>Mon, 09 Jan 2017 14:37:00 +0900</lastBuildDate>
+<totalCount>2977392</totalCount>
+<pageCount>800</pageCount>
+<result>3</result>
+<item>
+	<title>[ &lt;b&gt;Java&lt;/b&gt; ] 자바 초보 강좌 : 자바 설치</title>
+	<description>&lt;b&gt;자바&lt;/b&gt;의 역사 &lt;b&gt;자바&lt;/b&gt;는 1991년 SUN의 그린프로젝트에서 시작되었습니다. 그리고 1995년에 출시되었습니다. &lt;b&gt;자바&lt;/b&gt;는 제임스 고슬링과 여러 개발자들에 의해 개발되었습니다. 본래는 가전제품의 제어를 위한 시스템의 언어로써 설계되었...</description>
+	<link>http://tworab.tistory.com/74</link>
+	<author>Two rab</author>
+	<comment>http://tworab.tistory.com/</comment>
+	<pubDate>20161112172055</pubDate>
+</item>
+<item>
+	<title>javascript compressor</title>
+	<description>Javascript Compressor 이번에 포스팅 하고자 하는 주제는 Javascript Compressor기능이다. [그림 1. Jacascript 압축된 코드] Javascript Compressor를 이용하여 단순한 코드를 이렇게 변형시켜 놓았다. Compressor는 압축기...</description>
+	<link>http://mazino.tistory.com/41</link>
+	<author>해킹 관련 블로그</author>
+	<comment>http://mazino.tistory.com/</comment>
+	<pubDate>20170108232116</pubDate>
+</item>
+<item>
+	<title>[&lt;b&gt;Java&lt;/b&gt;]개발환경 구성</title>
+	<description>안드로이드, 스프링도 자바를 기반으로 구현한다. 자바의 실행과정 1. 사용자가 소스코드 작성(.&lt;b&gt;java&lt;/b&gt; 파일 생성) 2. 자바 컴파일러(javac)가 .&lt;b&gt;java&lt;/b&gt; 파일을 컴파일 하여 .class 파일 생성 3. 바이트 코드인 .class 파일(가상머신에...</description>
+	<link>http://spillmoon.tistory.com/154</link>
+	<author>정리를 하는 블로그</author>
+	<comment>http://spillmoon.tistory.com/</comment>
+	<pubDate>20170102162951</pubDate>
+</item>
+</channel>
+

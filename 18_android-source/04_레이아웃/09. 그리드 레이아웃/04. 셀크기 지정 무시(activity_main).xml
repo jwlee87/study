@@ -1,0 +1,19 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:columnCount="3"
+	>
+	<Button android:text="1" 
+		android:layout_width="match_parent" 
+		android:layout_height="match_parent" />
+	<Button android:text="2" />
+	<Button android:text="3" />
+	<Button android:text="4" />
+	<Button android:text="AAAAAAAAAA" />
+	<Button android:text="6" />
+	<Button android:text="7" 
+		android:layout_width="50dp" 
+		android:layout_height="40dp" />
+</GridLayout>
+
+

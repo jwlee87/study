@@ -1,0 +1,52 @@
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+    }
+
+}
+
+xml
+-------------------------------------------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lollipop"
+    />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tint="#88ff0000"
+        android:src="@drawable/ic_launcher"
+        android:scaleType="center"
+    />
+
+    <!-- adjustViewBounds : 이미지가 표현하고자 하는 레이아웃 보다 클때 비율을 그대로 유지할지 확인 한다. -->
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@drawable/lollipop" />
+
+    <!-- cropToPadding : 이미지가 레이아웃보다 크다면 잘라 낼 것인지에 확인한다.  -->
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="false"
+        android:src="@drawable/lollipop"
+        android:padding="20dp"
+        android:cropToPadding="true" />
+</LinearLayout>

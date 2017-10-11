@@ -1,0 +1,54 @@
+package kr.co.mlec.lecture;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+public class MainActivity extends Activity {
+    ImageView imgView;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        setContentView(R.layout.activity_main);
+        Button btn = (Button)findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imgView.setImageResource(R.drawable.so1);
+            }
+        });
+        imgView = (ImageView)findViewById(R.id.imageView1);
+    }
+}
+
+
+
+xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="ÀÌ¹ÌÁöºä"
+        />
+    <ImageView
+        android:layout_height="wrap_content"
+        android:src="@drawable/so"
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content" />
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="click"
+        />
+</LinearLayout>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#cTime { font-size: 20px; width: 120px; display: inline-block;}
+	button {
+		border: 1px solid skyblue;
+		width: 100px;
+	}
+</style>
+</head>
+<body>
+	<audio id="myAudio">
+		<source src="exid.mp3" type="audio/mpeg" />
+	</audio>
+	<div>
+		<button id="play">시작</button>
+		<button id="forward">앞으로</button>
+		<button id="backward">뒤로</button>
+		
+		<span id="cTime">0:00</span>
+		<button id="mute">음소거</button>
+		<input id="volumeAudio" type="range" 
+		       min="0" max="1" step="0.1" value="0.5" />
+	</div>
+	<div id="debug"></div>
+	
+	<script>
+		var debug = document.querySelector("#debug");
+		var cTime = document.querySelector("#cTime");
+		var audio = document.querySelector("#myAudio");
+		
+		var playBtn = document.querySelector("#play");
+		playBtn.onclick = function () {
+			// audio.paused : true(중지된 경우), false(플레이중)
+			console.log(audio.paused);
+			// 중지된 상태일 경우 플레이 시키기
+			if (audio.paused) {
+				// 오디오 실행
+				audio.play();
+				playBtn.innerHTML = "일시중지";
+			}
+			// 플레이 상태일 경우 일시 중지 시킨다.
+			else {
+				audio.pause();
+				playBtn.innerHTML = "시작";				
+			}
+		};
+		
+		// 앞으로 버튼 이벤트 처리
+		var forwardBtn = document.querySelector("#forward");
+		forwardBtn.onclick = function () {
+			audio.currentTime += 10;
+		};
+
+		// 뒤로 버튼 이벤트 처리
+		var backwardBtn = document.querySelector("#backward");
+		backwardBtn.onclick = function () {
+			audio.currentTime -= 10;
+		};
+
+		// 음소거 이벤트 처리
+		var muteBtn = document.querySelector("#mute");
+		muteBtn.onclick = function () {
+			audio.muted = !audio.muted;
+		};
+		
+		// 볼륨 이벤트 처리
+		var volumeAudio = document.querySelector("#volumeAudio");
+		volumeAudio.onchange = function () {
+			audio.volume = volumeAudio.value;
+			
+		};
+		
+		audio.addEventListener("timeupdate", function () {
+			var currentTime = parseInt(audio.currentTime); 
+			var duration    = parseInt(audio.duration);
+			
+			var time = parseInt(currentTime / 60) + ":" + 
+			           pad(currentTime % 60) + " / " +
+			           parseInt(duration / 60) + ":" +
+			           pad(duration % 60);
+			cTime.innerHTML = time;
+		});
+		
+		function pad(time) {
+			return time < 10 ? "0" + time : time;
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>파일</title>
+    <script src="jquery-3.1.1.min.js"></script>
+    <style>
+		.img {
+			display:block; 
+			width:100px; 
+			height:105px; 
+			line-height:105px; 
+			margin-bottom:10px; 
+			border:2px solid #ddd; 
+			background:url('icon-camera.png') no-repeat center; 
+			background-size:70px 50px; 
+			overflow:hidden;
+		}        
+        .img img {
+			width:100%; 
+			vertical-align:middle;
+		}
+		.file {
+			display:block; 
+			width:104px; 
+			height:30px; 
+			box-sizing:border-box; 
+			overflow:hidden;
+		}        
+        .file input {
+			width:104px; 
+			height:30px; 
+			overflow:hidden; 
+			/*  파일 선택 버튼 숨기기 */
+			text-indent:-5000px; 
+			cursor:pointer; 
+			/*  선택된 파일 정보 숨기기*/
+			color:transparent; 
+			padding:0;
+		}
+		.txt-photo {
+			background-repeat:no-repeat;
+			background-position:center;
+			background-image:url('txt-photo.png');
+			background-color:#00528c;
+			border:1px solid #092b68;
+		}
+    </style>
+</head>
+<body>
+    <div>
+		<span id="imgFrame" class="img"></span> 
+		<span class="file txt-photo">
+			<input type="file" name="attachFile" onchange="loadFile(event)" />
+		</span>
+		<ul>
+			<li>- gif 혹은 jpg 형식</li>
+			<li>- 100kbyte 이내<br />&nbsp;&nbsp;사진만 업로드 가능
+			</li>
+			<li>- 권장사이즈 100*150</li>
+		</ul>
+	</div>
+    <script>
+    function loadFile(event) {
+    	var file = event.target.files[0];
+    	if (file.type.substring(0, 5) != 'image') {
+    		alert("이미지를 선택하세요");
+    		return false;
+    	}
+    	if (file.size > 100 * 1024) {
+    		alert("100kb 미만의 파일을 선택하세요");
+    		return false;
+    	}
+    	
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = "<img src="+reader.result+" alt='' />";
+    	    $('.img').html(output);
+        };
+        reader.readAsDataURL(file);
+    };    
+    </script>
+</body>
+</html>

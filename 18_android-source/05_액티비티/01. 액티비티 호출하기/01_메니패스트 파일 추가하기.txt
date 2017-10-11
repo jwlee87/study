@@ -1,0 +1,1 @@
+<activity android:name=".SubActivity1" android:label="Sub 액비티비"></activity>

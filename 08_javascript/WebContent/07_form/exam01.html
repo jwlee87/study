@@ -1,0 +1,74 @@
+<!-- 
+	form 이 submit 되는 시점에 호출
+	
+	onsubmit="return false"            :  submit 취소
+	onsubmit="return false이외의 상태"  :  submit 실행
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form name="mForm" action="result.html" onsubmit="return doAction();">
+		id : <input type="text" name="id" /><br>
+		pass : <input type="password" name="password" /><br>
+		pass 확인: <input type="password" name="password2" /><br>
+		<button>전송</button>
+		<button type="button" onclick="doAction();">버튼</button>
+	</form>
+	
+	<script>
+		function doAction() {
+			var f = document.mForm;
+			var id = f.id;
+			var password = f.password;
+			var password2 = f.password2;
+			
+			if (id.value == "") {
+				alert("아이디를 입력하세요");
+				id.focus();
+				return false;
+			}
+			
+			if (password.value == "") {
+				alert("패스워드를 입력하세요");
+				password.focus();
+				return false;
+			}
+			
+			if (password2.value == "") {
+				alert("패스워드 확인을 입력하세요");
+				password2.focus();
+				return false;
+			}
+			
+			if (password.value != password2.value) {
+				alert("입력된 패스워드를 확인하세요");
+				password.focus();
+				password.select();
+				return false;
+			}
+			
+			// 폼을 action에 지정된 페이지로 이동함...
+			return true;
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

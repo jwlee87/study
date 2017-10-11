@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#cTime { font-size: 30px; }
+</style>
+</head>
+<body>
+	<!-- 위쪽의 오디오 태그만 만든 다음 화면에서 실행 후 테스트 
+		1. 컨트롤
+		2. 자동 플레이
+		3. 반복시키기
+	-->
+	<audio id="myAudio" controls="controls" 
+	       autoplay="autoplay" loop="loop">
+		<source src="MyType.mp3" type="audio/mpeg">
+	</audio>
+	
+	<p>
+		<span id="cTime">0</span>
+	</p>
+	
+	<!--  이벤트 호출되는 시간 로그로 출력  -->
+	<div id="debug"></div>
+	<script>
+		var debug = document.querySelector("#debug");
+		var tSpan = document.querySelector("#cTime");
+		var audio = document.querySelector("#myAudio");
+		audio.addEventListener("timeupdate", function() {
+			var cTime = audio.currentTime;
+			
+			// 이벤트 호출되는 시간 로그로 출력
+			debug.innerHTML = cTime + "<br />" + debug.innerHTML;
+			tSpan.innerHTML = parseInt(cTime / 60) + ':' + lpad(parseInt(cTime % 60));
+		});
+		
+		function lpad(cTime) {
+			return cTime < 10 ? "0" + cTime : cTime;
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

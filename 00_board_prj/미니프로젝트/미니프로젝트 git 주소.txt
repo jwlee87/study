@@ -1,0 +1,6 @@
+1 - 5조
+http://sbc2000kr@www.mlec.co.kr:9000/r/bit90/mini1-project1.git
+http://sbc2000kr@www.mlec.co.kr:9000/r/bit90/mini1-project2.git
+http://sbc2000kr@www.mlec.co.kr:9000/r/bit90/mini1-project3.git
+http://sbc2000kr@www.mlec.co.kr:9000/r/bit90/mini1-project4.git
+http://sbc2000kr@www.mlec.co.kr:9000/r/bit90/mini1-project5.git

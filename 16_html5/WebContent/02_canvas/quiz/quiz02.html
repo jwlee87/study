@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+         <title>Canvas Line 그리기</title>
+    </head>
+    <body>
+	<h1>캔버스 - 선 그리기</h1>
+	<canvas id="myCanvas" width="600" height="400" style="border: 1px solid orange;">
+		<p>브라우져가 지원하지 않습니다.</p>
+	</canvas>
+	
+    <script type="text/javascript">
+       var canvas = document.getElementById('myCanvas');
+       var ctx = canvas.getContext('2d');
+
+		
+		// 삼각형 1
+		ctx.beginPath();  
+		ctx.fillStyle = "orange"; // 색상 지정
+		ctx.moveTo(0,0);          // 시작점
+		ctx.lineTo(200,0);        // 좌표를 이동하고 이전 좌표에 선을 긋는다.
+		ctx.lineTo(100,200);      
+		ctx.fill();               // 선들을 연결하고 안쪽을 채운다.
+		
+		// 삼각형 2
+		ctx.beginPath(); 
+		ctx.fillStyle = "black";
+		ctx.moveTo(100,200); 
+		ctx.lineTo(0,400);
+		ctx.lineTo(200,400);
+		ctx.fill(); 
+	
+		// 삼각형 3
+		ctx.beginPath();
+		ctx.strokeStyle = "blue"; 
+		ctx.moveTo(500,0);   
+		ctx.lineTo(400,200);
+		ctx.lineTo(600,200);
+		ctx.closePath();     
+		ctx.stroke();        
+		
+		// 삼각형 4
+		ctx.beginPath();
+		ctx.strokeStyle = "orange";
+		ctx.moveTo(400,210);  
+		ctx.lineTo(600,210);
+		ctx.lineTo(500,400);
+		ctx.closePath();     
+		ctx.stroke();          
+    </script>
+    </body>
+</html>

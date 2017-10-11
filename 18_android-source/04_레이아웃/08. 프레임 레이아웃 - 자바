@@ -1,0 +1,44 @@
+import android.app.Activity;
+import android.os.Bundle;
+
+import android.view.View;
+import android.widget.ImageView;
+
+public class MainActivity extends Activity {
+    int[] imgs;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        imgs = new int[]{
+                R.id.img1, R.id.img2, R.id.img3, R.id.img4, R.id.img5
+        };
+    }
+
+    public void process(View view) {
+        for (int img : imgs) {
+            ((ImageView) findViewById(img)).setVisibility(View.INVISIBLE);
+        }
+        int index = 0;
+        switch (view.getId()) {
+            case R.id.button1:
+                index = 0;
+                break;
+            case R.id.button2:
+                index = 1;
+                break;
+            case R.id.button3:
+                index = 2;
+                break;
+            case R.id.button4:
+                index = 3;
+                break;
+            case R.id.button5:
+                index = 4;
+                break;
+        }
+
+        ((ImageView) findViewById(imgs[index])).setVisibility(View.VISIBLE);
+    }
+}

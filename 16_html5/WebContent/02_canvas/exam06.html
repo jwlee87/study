@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="400" 
+	        style="border: 1px solid tomato"></canvas>
+	        
+	<script>
+		var canvas = document.querySelector("#myCanvas");
+		var ctx = canvas.getContext("2d");
+		
+		ctx.font = "bold 40px 궁서";
+		ctx.textAlign = "center";
+		ctx.fillText("HTML5", 10, 60);
+		ctx.textAlign = "left";  // start
+		ctx.strokeText("HTML5", 10, 120, 100);
+		ctx.textAlign = "right"; // end
+		ctx.strokeText("HTML5", 10, 180, 200);
+	</script>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

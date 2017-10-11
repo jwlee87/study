@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	button {
+		border: 1px solid skyblue;
+		width: 100px;
+	}
+</style>
+<script>
+
+// 실행중인 파일명
+var btn;
+// 시작버튼, 중지버튼 클릭 시
+function playVideo() {
+	// 일시중지 상태 일 경우 시작으로 변경
+	if (oVideo.paused) {
+		oVideo.play();
+		btn.innerHTML = "일시중지";
+	} 
+	
+	// 시작 상태일 경우 일시 중지로 변경
+	else {
+		oVideo.pause();
+		btn.innerHTML = "시작";
+	}
+}
+
+// -------------------------------
+// 추가
+// -------------------------------
+var progress;
+var oVideo;
+
+window.onload = function () {
+	btn       = document.getElementById('play');
+	videoFile = document.getElementById('videoFile');
+	
+	oVideo = document.getElementById('video');
+	oVideo.volume = document.getElementById('sound').value * 0.1;
+	
+// -------------------------------
+// 추가
+	btn.innerHTML = "일시중지";
+
+	progress = document.getElementById("progress");
+	
+	progress.onmousedown = function () {
+		oVideo.pause();
+	};
+
+	progress.onmouseup = function () {
+		oVideo.currentTime = parseInt(video.duration * (this.value / 100));
+		oVideo.play();
+		btn.innerHTML = "일시중지";
+	};
+
+	oVideo.ontimeupdate = function () {
+	    progress.value = (100 / oVideo.duration) * oVideo.currentTime;
+	};
+// -------------------------------
+};
+
+// 음소거
+function muteVideo() {
+	console.log(oVideo.muted);
+    oVideo.muted = !oVideo.muted;	
+}
+
+// 볼륨 조절
+function soundVideo(val) {
+    oVideo.volume = val;
+}
+
+// 15초 전으로 이동
+function rewindVideo() {
+    oVideo.currentTime -= 15;
+}
+
+// 15초 앞으로 이동
+function forwardVideo() {
+    oVideo.currentTime += 15;
+}
+
+// 다시 듣기
+function restartVideo() {
+    oVideo.currentTime = 0;
+}
+</script>
+</head>
+<body>
+	<div id="videoDiv">
+		<video id="video" width="720" height="480" autoplay loop>
+			<source src="Naruto.mp4">
+		</video>
+	</div>
+	
+    <p>
+		<input id="progress" type="range" 
+		       value="0" style="width: 720px" min="0" max="100" step="1" />
+	</p>	       	
+    <p>
+	    <button id="play" onclick="playVideo();">시작</button>
+	    <button onclick="rewindVideo();">뒤로</button>
+	    <button onclick="forwardVideo();">앞으로</button>
+	    <button onclick="restartVideo();">다시시작</button>
+	    <label><input type="checkbox" onclick="muteVideo();" />음소거</label>
+	    <input id="sound" type="range" min="0" max="1" step="0.1" value="0.5" 
+	           onchange="soundVideo(this.value)"/> 음량조절
+	</p>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

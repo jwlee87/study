@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/contentEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="내용 입력" />
+
+    <EditText
+        android:id="@+id/sizeEdit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="크기 입력" />
+
+    <RadioGroup
+        android:id="@+id/colorGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="빨강" />
+
+        <RadioButton
+            android:id="@+id/blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="파랑" />
+
+        <RadioButton
+            android:id="@+id/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검정" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/applyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="적용" />
+
+    <TextView
+        android:id="@+id/resultTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="결과가 보입니다."/>
+
+</LinearLayout>

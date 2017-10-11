@@ -1,0 +1,12 @@
+스프링 게시판 생성하기
+
+1. 각 모듈별 service 패키지 추가
+   - 서비스 인터페이스와 구현 클래스 생성
+
+2. Mapper를 인터페이스로 변경
+   - Mapper 인터페이스의 이름과 xml의 id가 동일해야 함
+        
+3. context-repository.xml 에 아래의 내용 추가함
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.mlec.repository.mapper" />
+	</bean>

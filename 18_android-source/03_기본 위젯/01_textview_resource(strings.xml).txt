@@ -1,0 +1,12 @@
+strings.xml
+
+<resources>
+    <string name="app_name">비트 수업</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="insa">Hello</string>
+    <string name="anyoung">안녕하세요</string>
+
+</resources>

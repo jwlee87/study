@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#timeDiv {
+	width: 50%;
+	background-color: black;
+	height: 100px;
+	line-height: 100px;
+	color: white;
+	font-size: 50px;
+	font-weight: bold;
+	padding: 20px;
+	text-align: center;
+	margin: 0px auto;
+}
+
+button {
+	border: 1px solid #334455;
+	background: tomato;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+	padding: 20px;
+	margin: 50px;
+	border-radius: 30%;
+	width: 200px;
+	box-shadow: 2px 2px 4px #334455;
+}
+
+.btnDiv {
+	text-align: center;
+}
+</style>
+<script>
+	var timer;
+	function clockStart() {
+		var date = new Date();
+		var tDiv = document.getElementById("timeDiv");
+		    tDiv.innerHTML = date.toLocaleTimeString();
+		if (!timer) {
+			timer = setInterval(clockStart, 1000);
+		}
+		
+	}
+	function clockStop() {
+		clearInterval(timer);
+		timer = null;
+	}
+</script>
+</head>
+<body>
+	<div class="btnDiv">
+		<button onclick="clockStart();">시작</button>
+		<button onclick="clockStop();">정지</button>
+	</div>
+	<div id="timeDiv">시작 버튼을 누르세요</div>    
+</body>
+</html>

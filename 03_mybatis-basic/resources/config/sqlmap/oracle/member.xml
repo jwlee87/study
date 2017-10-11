@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mlec.member.dao.MemberMapper">
+    <select id="getMemberInfo1" parameterType="string" resultType="member">
+        select id,
+        	   name,
+        	   email,
+        	   addr
+          from mybatis_member
+         where id = #{id}
+    </select>
+    <select id="getMemberInfo2" parameterType="member" resultType="member">
+        select id,
+        	   name,
+        	   email,
+        	   addr
+          from mybatis_member
+         where name = #{name}        
+           and email = #{email}        
+    </select>
+    
+    <select id="getMemberInfo3" parameterType="string" resultType="string">
+        select id
+          from mybatis_member
+         where name = #{name}        
+    </select>
+    
+    <select id="getMemberInfo4" resultType="int">
+        select count(*)
+          from mybatis_member
+    </select>
+     
+    <!--  여러 행의 데이터 처리 연습  -->
+    <select id="getMemberList1" resultType="member">
+        select id,
+        	   name,
+        	   email,
+        	   addr,
+        	   join_date as joinDate
+          from mybatis_member
+         order by id 
+    </select>   
+    
+    <resultMap id="memberMap" type="member">
+        <result property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="email" column="email" />
+        <result property="addr" column="addr" />
+        <result property="joinDate" column="join_date" />
+    </resultMap>
+    
+    <select id="getMemberList2" resultMap="memberMap">
+        select *
+          from mybatis_member
+         order by id 
+    </select>   
+    
+    <insert id="insertMember" parameterType="member">
+        insert into mybatis_member (
+        	id,
+        	name,
+        	email,
+        	addr
+        ) values (
+        	#{id},
+        	#{name},
+        	#{email},
+        	#{addr}
+        )
+    </insert>
+    <update id="updateMember" parameterType="member">
+        update mybatis_member
+           set addr = #{addr}
+         where id = #{id}
+    </update>
+    
+    <delete id="deleteMember" parameterType="string">
+        delete 
+          from mybatis_member
+         where id = #{id} 
+    </delete>
+    
+    <select id="getMemberIteratorList" parameterType="member" resultMap="memberMap">
+        select *
+          from mybatis_member
+		 where name = #{name}
+		   and addr in <foreach item="addr" collection="addrs" open="(" close=")" 
+		                        separator=",">
+		   					#{addr}
+		               </foreach>         
+    </select>
+
+    <sql id="commonMember">
+          from mybatis_member
+		 where name like  '%' || #{name} || '%'
+		   and email like '%' || #{email} || '%'      
+    </sql>
+    
+    <select id="getMemberIncludeList" parameterType="member" resultMap="memberMap">
+        select *
+        <include refid="commonMember" />
+    </select>
+
+    <select id="getMemberIncludeListCount" parameterType="member" resultType="int">
+        select count(*)
+        <include refid="commonMember" />   
+    </select>
+    
+    <select id="getMemberDynamicList1" parameterType="member" resultMap="memberMap">
+        select *
+          from mybatis_member
+          <where>
+			 <if test="id != null">
+			   id like '%' || #{id} || '%'
+			 </if>
+			 <if test="name != null">
+			   and name like '%' || #{name} || '%'
+			 </if>
+          </where>
+          
+       <!-- 
+		 where 1 = 1 
+		 <if test="id != null">
+		   and id like '%' || #{id} || '%'
+		 </if>
+		 <if test="name != null">
+		   and name like '%' || #{name} || '%'
+		 </if>
+        -->   
+    </select>
+    
+    <select id="getMemberDynamicList2" parameterType="search" resultMap="memberMap">
+        select *
+          from mybatis_member
+          <where>
+              <choose>
+                  <when test="searchType == 'id'">
+                      id like '%' || #{searchWord} || '%'
+                  </when>
+                  <otherwise>
+                      name like '%' || #{searchWord} || '%'
+                  </otherwise>
+              </choose>
+          </where>
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

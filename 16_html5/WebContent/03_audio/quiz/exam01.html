@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#cTime { font-size: 30px; width: 60px; display: inline-block;}
+	button {
+		border: 1px solid skyblue;
+		width: 100px;
+	}
+</style>
+</head>
+<body>
+	<audio id="myAudio">
+		<source src="MyType.mp3" type="audio/mpeg">
+	</audio>
+	<p>
+		<select id="audioFile">
+			<option value="">선택</option>
+			<option value="exid.mp3">exid</option>
+			<option value="MyType.mp3">MyType</option>
+		</select>
+	</p>
+	<p>
+		<span id="cTime">0:00</span>
+		<button id="play">시작</button>
+		<button id="forward">앞으로</button>
+		<button id="backwards">뒤로</button>
+		<button id="restart">다시시작</button>
+
+		<button id="mute">음소거</button>
+		<input id="volumeAudio" type="range" min="0" max="1" step="0.1" value="0.5" />
+	</p>
+	<!-- 플레이 진행률과 플레이 시간 변경 -->
+	<p>
+		<canvas id="myCanvas" width="500" height="20"
+		        style="border: 1px solid blue; margin-top: 10px; padding: 2px;">
+		</canvas>
+	</p>
+	
+	<script>
+		var canvas = document.querySelector("#myCanvas");
+		
+		var tSpan = document.querySelector("#cTime");
+		var audio = document.querySelector("#myAudio");
+		audio.addEventListener("timeupdate", function() {
+			var cTime = audio.currentTime;
+			var time = parseInt(cTime / 60) + ':' 
+			         + lpad(parseInt(cTime % 60));
+			tSpan.innerHTML = time;
+			
+			/* 
+				-----------------------------------------------------
+			     캔버스 추가된 부분
+			    -----------------------------------------------------
+			 */
+			// 현재 플레이 시간
+			var eTime = Math.round(cTime);
+			// 전체 오디오 플레이시간
+			var dTime = audio.duration;
+			// 그림을 그릴 컨텍스트
+			var ctx = canvas.getContext("2d");
+			
+			ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientWidth);
+			ctx.fillStyle = "tomato";
+			
+			var rectWidth = (eTime / dTime) * canvas.clientWidth;
+			ctx.fillRect(0, 0, rectWidth, canvas.clientHeight);
+		});
+		
+		canvas.onclick = function (e) {
+			audio.currentTime = 
+				(e.offsetX / canvas.clientWidth) * audio.duration;
+		};
+		
+		// 현재 사용자가 듣고 있는 음악
+		var currentFile;
+		document.querySelector("#play").onclick = function () {
+			// 음악선택 작업 추가
+			var audioFile = document.querySelector("#audioFile");
+			if (audioFile.value == "") {
+				alert("파일을 선택 후 플레이 하세요");
+				return false;
+			}
+			
+			// 현재 플레이되는 음악과 사용자가 선택한 음악이 
+			// 다른 경우만 변경
+			if (currentFile != audioFile.value) {
+				audio.src = audioFile.value;
+				currentFile = audioFile.value;
+			}
+			
+			// 일시중지 상태일 경우 플레이 시킨다.
+			if (audio.paused) {
+				audio.play();
+				document.querySelector("#play").innerHTML = "일시중지";
+			} 
+			else {
+				audio.pause();
+				document.querySelector("#play").innerHTML = "시작";
+			}
+		};
+		
+		document.querySelector("#forward").onclick = function () {
+			audio.currentTime += 10;
+		};
+		
+		document.querySelector("#backwards").onclick = function () {
+			audio.currentTime -= 10;
+		};
+		
+		document.querySelector("#restart").onclick = function () {
+			audio.currentTime = 0;
+		};
+
+		document.querySelector("#mute").onclick = function () {
+			audio.muted = !audio.muted;
+		};
+
+		document.querySelector("#volumeAudio").onchange = function () {
+			audio.volume = this.value;
+		};
+		
+		function lpad(cTime) {
+			return cTime < 10 ? "0" + cTime : cTime;
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

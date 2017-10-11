@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <script>
+        function chImgSize(type) {
+            var imgObj = document.getElementById("lottoImg");
+            switch (type) {
+            case "big" :
+            	imgObj.width  += 10;
+            	imgObj.height += 10;
+                break;
+            case "small" :
+            	imgObj.width  -= 10;
+            	imgObj.height -= 10;
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+	<input type="button" value="크게" onclick="chImgSize('big')" />
+	<input type="button" value="작게" onclick="chImgSize('small')" />
+	<br /><br />
+	<div id="imgDiv">
+		<img id="lottoImg" src="ball41.gif" width="33" height="33" />
+	</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+스프링 게시판 생성하기
+
+1. pom.xml 내용 작성하기
+   - pom.xml 파일에 db 관련 라이브러리 dependency 추가하기
+     (기존 15_spring-mybatis pom.xml 파일 참조)
+
+2. 데이터베이스 관련 설정 내용 적용하기
+   - context-repository.xml 파일 생성 후 수업에 사용한 내용 적용
+     (src/main/resources/config/spring 폴더 하위)
+   - web.xml 파일을 열어서 아래 내용 추가함
+     <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:config/spring/context-*.xml
+		</param-value>
+	 </context-param>
+
+	 <listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	 </listener>     
+        
+3. 기존에 작성한 spring-mvc.xml 파일 위치 이동하기
+   - WEB-INF 밑으로 이동
+   - web.xml 파일을 열어서  
+     classpath:config/spring/spring-mvc.xml 를
+     /WEB-INF/spring-mvc.xml 로 변경   
+         
+4. dao 클래스 소스 변경
+   - @Autowired
+	 private SqlSessionTemplate session;
+   - commit 부분 삭제	 
+        
+5. sqlMapConfig.xml 불필요 부분 삭제	 
+
+6. mapper.xml 파일들의 typeAlias 명을 클래스명의 첫자를 소문자로 한것으로 변경
+   - board.xml, login.xml
+     예>  board -> boardVO, login -> memberVO 등등...      

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function cal() {
+		window.open(
+				"exam02_child.html", 
+				"pop", 
+				"width=500,height=400");
+	}
+	function fn_result(val) {
+		var obj = document.getElementById("result");
+		obj.innerHTML = val;
+	}
+</script>
+</head>
+<body>
+	<h1 id="result"></h1>
+	<button onclick="cal()">계산</button>
+</body>
+</html>

@@ -1,0 +1,114 @@
+스프링 게시판 생성하기
+
+1. maven war 프로젝트 생성하기
+   - 00_spring-board
+
+2. 웹 디렉토리 구조 생성하기
+   - WEB-INF 폴더 생성(src/main/webapp 폴더 하위)
+   - web.xml 파일 복사해서 WEB-INF 폴더에 붙여넣기
+     (기존 14_spring-mvc 에서 작성한것)
+        
+3. pom.xml 내용 작성하기
+   - 14_spring-mvc 에서 작성한 파일에서 <dependencies>...</dependencies> 
+     부분의 내용을 복사해서 붙여넣기 한다.        
+        
+4. 프로젝트 자바 버젼 1.8로 변경하기
+   - 프로젝트 선택 후 마우스 오른쪽 버튼을 클릭하여 properties 매뉴 선택
+   - Java Compiler 항목 선택 후 1.8로 변경
+   - Java Build Path 항목 선택 후  라이브러리 탭 선택 후 1.8로 변경
+   - Project Facets 항목 선택 후 Java 1.8로 변경
+   
+5. 기존 작성한 게시판(10_mvc) 코드 복사 붙여넣기
+   - 10_mvc 프로젝트의 src 하위 kr 폴더를 복사한 후 src\main\java 폴더에 붙여넣기
+   - 10_mvc 프로젝트의 WebContent\WEB-INF\lib 폴더를 복사한 후 동일한 위치에 붙여넣기
+   - 10_mvc 프로젝트의 WebContent\jsp 폴더를 복사한 후 WebContent\WEB-INF 폴더에 붙여넣기
+   - 10_mvc 프로젝트의 WebContent\css,js 폴더를 복사한 후 동일한 위치에 붙여넣기 
+
+6. 스프링 mvc 설정
+   - 14_spring-mvc 프로젝트의 src/main/resources/config/spring 폴더를 복사한 후
+     동일한 위치에 붙여넣기  
+  
+7. WEB-INF/lib 폴더 밑의 jar 파일 import하기 
+   - 프로젝트 선택 후 마우스 오른쪽 버튼을 클릭하여 properties 매뉴 선택
+   - Java Build Path 메뉴 선택 후 Libraries 탭 선택 후 Add Jar 버튼 클릭하여
+     lib 밑의 jar 파일 import 
+  
+8. 각 자바 클래스 import 적용하기
+
+9. 컨트롤러 클래스의 mav.addAttribute 코드를 mav.addObject로 변경하기
+
+10. jsp 폴더 밑의 include 경로 수정하기
+   - /jsp/include 경로를 /WEB-INF/jsp/include 로 변경
+	
+11. 기존 redirect로 설정된 것 중에서 프로젝트 경로 삭제하기
+   - LoginController 컨트롤러 클래스
+     변경 예> 
+     "redirect:" + request.getContextPath() + "/main/main.do"
+     "redirect:/main/main.do"
+     
+12. 파일 업로드 처리 부분 스프링 적용
+   - 파일 업로드 처리
+   - 변경적용된 BoardController 클래스 확인      
+         
+13. 컨트롤러 클래스의 ModelAndView의 View 페이지가 .do로 이동하는 모든 메서드를
+    redirect 형태로 변경         
+         
+14. 컨트롤러 ajax 사용 부분 변경하기
+   - return "ajax:" + new Gson().toJson(dao.selectBoardCommentByNo(comment.getNo()));
+   - @ResponseBody 적용하기       
+         
+15. 컨트롤러 DAO DI 적용
+   - private BoardDAO dao;
+	 public BoardController() {
+		this.dao = new BoardDAO();
+	 }
+	 -->
+	 @Autowired
+	 private BoardDAO dao;
+	 
+16. DAO 클래스 어노테이션 이용 빈 등록
+    @Repository
+    public class BoardDAO
+
+    @Repository
+    public class LoginDAO
+	 
+17. spring-mvc.xml 파일에서 아래부분 삭제
+	<mvc:view-controller path="/file/uploadForm.do"
+		 view-name="file/fileUploadForm" />
+
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/interceptor/**" />
+			<mvc:exclude-mapping path="/interceptor/login*.do" />
+			<bean class="kr.co.mlec.interceptor.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>	 
+	          
+18. 최초 메인 호출 페이지 작성하기
+    - webapp 하위에 index.jsp 파일 생성
+    - body 태그에 아래의 내용 적용
+      <script>
+		  location.href = "${pageContext.request.contextPath}/main/main.do";
+	  </script>	      
+	  
+	  
+-- 추가작업
+
+- spring-mvc.xml 파일 아래 내용 추가
+
+	<!-- 메인페이지 이동 -->
+	<mvc:view-controller path="/main/main.do" />
+	<!-- 글쓰기 폼 이동 -->
+	<mvc:view-controller path="/board/writeForm.do" />
+	<!-- 로그인 폼 이동 -->
+	<mvc:view-controller path="/login/loginForm.do" />  
+	
+- 컨트롤러 메서드 변경
+
+- 페이징 적용
+
+
+	
+	
+	      

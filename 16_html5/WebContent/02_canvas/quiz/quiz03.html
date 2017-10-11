@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+window.onload = function () {
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+	
+	context.beginPath();
+	context.arc(300, 300, 300, 0, 2 * Math.PI, false);
+	context.stroke();
+
+	context.beginPath();
+	context.arc(150, 250, 70, 0, 2 * Math.PI, true);
+	context.stroke();
+
+	context.beginPath();
+	context.arc(150, 250, 35, 0, 2 * Math.PI, true);
+	context.stroke();
+	context.fillStyle = "gray";
+	context.fill();
+
+	context.beginPath();
+	context.arc(150, 200, 77, 0, Math.PI, true);
+	context.stroke();
+
+	context.beginPath();
+	context.arc(450, 250, 70, 0, 2 * Math.PI, true);
+	context.stroke();
+
+	context.beginPath();
+	context.arc(450, 250, 35, 0, 2 * Math.PI, true);
+	context.stroke();
+	context.fillStyle = "gray";
+	context.fill();
+
+	context.beginPath();
+	context.arc(450, 200, 77, 0, Math.PI, true);
+	context.stroke();
+	
+	context.beginPath();
+	context.moveTo(300, 260);
+	context.lineTo(220, 400);
+	context.lineTo(320, 400);
+	context.stroke();
+	
+	context.beginPath();
+	context.arc(300, 450, 100, 0, Math.PI, false);
+	context.stroke();
+}
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="600" style="border: 1px solid blue"></canvas>
+</body>
+</html>

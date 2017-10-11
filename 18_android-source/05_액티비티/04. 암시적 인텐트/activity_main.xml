@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/dialBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전화걸기" />
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="홈페이지" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="구글 검색" />
+
+    <Button
+        android:id="@+id/smsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="문자보내기" />
+
+    <Button
+        android:id="@+id/photoBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="사진보기" />
+
+</LinearLayout>

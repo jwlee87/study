@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../framework.js"></script>
+</head>
+<body>
+
+	<script>
+		$.ajax({
+			type: "POST",
+			dataType: "json", 
+			url: "exam01",
+			data: {id: "aaa", name: "bbb"},
+			success: function (result) {
+				alert("호출됨..");
+			}
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

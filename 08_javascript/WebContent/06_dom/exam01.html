@@ -1,0 +1,50 @@
+<!-- 
+	엘리먼트 노드 생성하기
+	var ele = document.createElement("엘리먼트 이름");
+	
+	텍스트 노드 생성하기
+	var textObj = document.createTextNode("텍스트");
+	
+	특정 엘리먼트의 자식으로 추가
+	parentNode.appendChild(childNode)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button onclick="doAdd(1);">H1추가</button>
+	<button onclick="doAdd(2);">DIV 추가</button>
+	<div id="divList1">H1 추가</div>
+	<div id="divList2">DIV 추가</div>
+	
+	<script>
+		function doAdd(comm) {
+			var dList  = "divList1",
+			    eleObj = "h1";
+			
+			if (comm == 2) {
+				dList = "divList2"; 
+				eleObj = "div";
+			}
+			
+			var divList = document.querySelector("#" + dList);
+			var cEle = document.createElement(eleObj);
+			var text = document.createTextNode("테스트");
+			cEle.appendChild(text);
+			divList.appendChild(cEle);
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

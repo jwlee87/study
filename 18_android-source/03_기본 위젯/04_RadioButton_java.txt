@@ -1,0 +1,36 @@
+package kr.co.mlec.lecture;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+    private RadioGroup emailGroup;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        emailGroup = (RadioGroup)findViewById(R.id.emailGroup);
+        emailGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                String msg = "";
+                switch (checkedId){
+                    case R.id.email1:
+                        msg = "수신 선택";
+                        break;
+                    case R.id.email2:
+                        msg = "수신하지 않음 선택";
+                        break;
+                }
+                Toast.makeText(
+                        getApplicationContext(), msg, Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
+
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.mlec.repository.mapper.LoginMapper">
+
+	<resultMap id="memberInfo" type="memberVO">
+		<result	column="user_id"    property="userId" 	/>
+		<result	column="password"   property="password" />
+		<result	column="email"  	property="email" 	/>
+	</resultMap>
+
+	<select id="getPass" parameterType="string" resultMap="memberInfo">
+		select user_id,
+			   password,
+			   email
+		  from tb_user
+		 where user_id = #{id}
+	</select>
+</mapper>

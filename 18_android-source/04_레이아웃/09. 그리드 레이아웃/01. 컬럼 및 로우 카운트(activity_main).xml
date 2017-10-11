@@ -1,0 +1,28 @@
+<!--
+		- columnCount와  rowCount를 둘다 주지 않으면 한줄로 쭉 나열됨
+		- columnCount  또는  rowCount를 주게 되면 해당하는 카운트를 화면에 출력하되
+		- 자동으로 위젯의 크기를 맞추지는 않는다.
+ -->
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="3"
+    android:rowCount="3"
+    android:orientation="horizontal">
+
+    <Button android:text="1" />
+    <Button android:text="2" />
+    <Button android:text="3" />
+    <Button android:text="4" />
+    <Button android:text="5" />
+    <Button android:text="6" />
+    <Button android:text="7" />
+    <Button android:text="8" />
+    <Button android:text="9" />
+    <Button android:text="10" />
+    <Button android:text="11" />
+    <Button android:text="12" />
+    <Button android:text="13" />
+
+</GridLayout>
+

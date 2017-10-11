@@ -1,0 +1,82 @@
+<!-- 
+	form 이 submit 되는 시점에 호출
+	
+	onsubmit="return false"            :  submit 취소
+	onsubmit="return false이외의 상태"  :  submit 실행
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../00_common/validUtil.js"></script>
+</head>
+<body>
+	<form name="mForm" action="result.html" onsubmit="return doAction();">
+		id : <input type="text" name="id" /><br>
+		pass : <input type="password" name="password" /><br>
+		pass 확인: <input type="password" name="password2" /><br>
+		<button>전송</button>
+		<button type="button" onclick="doAction2();">버튼</button>
+	</form>
+	
+	<script>
+		function doAction() {
+			var f = document.mForm;
+			
+			if (isEmpty(f.id, "아이디를 입력하세요")) 
+				return false;
+			
+			if (isEmpty(f.password, "패스워드를 입력하세요")) 
+				return false;
+
+			if (isEmpty(f.password2, "패스워드 확인을 입력하세요")) 
+				return false;
+			
+			if (f.password.value != f.password2.value) {
+				alert("입력된 패스워드를 확인하세요");
+				f.password.focus();
+				f.password.select();
+				return false;
+			}
+			
+			// 폼을 action에 지정된 페이지로 이동함...
+			return true;
+		}
+		function doAction2() {
+			var f = document.mForm;
+			if (isEmpty(f.id, "아이디를 입력하세요")) 
+				return ;
+			if (isEmpty(f.password, "패스워드를 입력하세요")) 
+				return ;
+			if (isEmpty(f.password2, "패스워드 확인을 입력하세요")) 
+				return ;
+			if (f.password.value != f.password2.value) {
+				alert("입력된 패스워드를 확인하세요");
+				f.password.focus();
+				f.password.select();
+				return ;
+			}
+			
+			// 폼을 action에 지정된 페이지로 이동함...
+			// 버튼을 이용한 체크일 경우에는 직접 submit에 대한 호출
+			f.submit();
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

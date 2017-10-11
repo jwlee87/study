@@ -1,0 +1,195 @@
+- 다음의 코드는 웹브라우져에서 ~.do로 호출 했을 경우 ~.jsp가 호출되는 과정의 코드입니다.
+
+----------------------------------------------------
+web.xml 파일
+----------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>MVC</display-name>
+  <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.mvc.DispatcherServlet</servlet-class>
+  </servlet>		
+  
+  <servlet-mapping>
+	<servlet-name>dispatcher</servlet-name>  
+	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>  
+
+----------------------------------------------------
+ModelAndView.java 파일
+----------------------------------------------------
+public class ModelAndView {
+	private String view;
+	private Map<String, Object> model = new HashMap<>();
+	public ModelAndView() {
+	}
+	public ModelAndView(String view) {
+		this.view = view;
+	}
+	public String getView() {
+		return view;
+	}
+	public void setView(String view) {
+		this.view = view;
+	}
+	public Map<String, Object> getModel() {
+		return model;
+	}
+	public void setModel(Map<String, Object> model) {
+		this.model = model;
+	}
+	// 데이터를 추가하는 기능
+	public void addAttribute(String key, Object value) {
+		model.put(key, value);
+	}
+}
+
+----------------------------------------------------
+DispatcherServlet.java 파일
+----------------------------------------------------
+public class DispatcherServlet extends HttpServlet {
+	private URLHandlerMapping mapping;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		mapping = new URLHandlerMapping();
+	}
+
+	@Override
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 사용자의 요청 URI 얻기
+		String requestUri = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		requestUri = requestUri.substring(contextPath.length());
+		
+		try {
+			Controller controller = mapping.getController(requestUri);
+			if (controller == null) {
+				throw new ServletException("요청하신 URL이 존재하지 않습니다.");
+			}
+			ModelAndView mav = controller.service(request, response);
+			
+			String view = mav.getView();
+			if (view.startsWith("redirect:")) {
+				response.sendRedirect(view.substring("redirect:".length()));
+			} 
+			else if (view.startsWith("ajax:")) {
+				response.setContentType("text/json; charset=utf-8"); 
+				PrintWriter out = response.getWriter();
+				out.println(view.substring("ajax:".length()));
+			}
+			else {
+				Map<String, Object> model = mav.getModel();
+				// map의 key 가져오기
+				Set<String> keys = model.keySet();
+				for (String key : keys) {
+					request.setAttribute(key, model.get(key));
+				}
+
+				RequestDispatcher rd = request.getRequestDispatcher(view);
+				rd.forward(request, response);
+			}
+			
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
+}
+
+----------------------------------------------------
+HandlerMapping.java 파일
+----------------------------------------------------
+public class URLHandlerMapping {
+	private Map<String, Controller> mappings = new HashMap<>();
+	public URLHandlerMapping() {
+		mappings.put("/board/list.do", new ListController());
+	}
+	
+	public Controller getController(String url) {
+		return mappings.get(url);
+	}
+}
+
+----------------------------------------------------
+BoardController.java 파일
+----------------------------------------------------
+public class ListController implements Controller {
+	
+	private BoardDAO dao;
+	
+	public ListController() {
+		this.dao = new BoardDAO();
+	}
+	
+	public ModelAndView service(
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		List<BoardVO> list = dao.selectBoard();
+		
+		ModelAndView mav = new ModelAndView("/jsp/board/list.jsp");
+		mav.addAttribute("list", list);
+		return mav;
+	}
+}
+----------------------------------------------------
+list.jsp 파일
+----------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>네트워크 게시판</title>
+</head>
+<body>
+<div class="container">
+	<div class="content">
+		<ol class="breadcrumb">
+		  <li><a href="${pageContext.request.contextPath}/main/main.do">Home</a></li>
+		  <li class="active">자유게시판</li>
+		</ol>
+		<hr>		
+		<div class="row">
+		    <div class="col-md-11"></div>
+		    <div class="col-md-1">
+				전체 <c:out value="${fn:length(list)}"/>개
+		    </div>
+		</div>
+		<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>글쓴이</th>
+				<th>등록일</th>
+			</tr>
+			</thead>
+			<c:forEach var="board" items="${list}">
+				<tr>
+					<td><c:out value="${board.no}" /></td>
+					<td><a href='detail.do?no=<c:out value="${board.no}"/>'><c:out value="${board.title}" /></a></td>
+					<td><c:out value="${board.writer}" /></td>
+					<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+				</tr>
+			</c:forEach>
+	
+			<c:if test="${empty list}">
+				<tr>
+					<td colspan='4'>입력된 게시물이 없습니다.</td>
+				</tr>
+			</c:if>
+		</table>
+		</div>
+		<div class="row">
+		    <div class="col-md-11"></div>
+		    <div class="col-md-1">
+				<a href='${pageContext.request.contextPath}/board/writeForm.do' class="btn btn-info" role="button">글쓰기</a>
+		    </div>
+		</div>
+	</div>		
+</div>
+</body>
+</html>
